@@ -189,35 +189,35 @@ app.get("/search/:searchVal/:orderBy/:desc", (req, res) => {
   });
 });
 
-app.get(
-  "/addForm/:title/:authors/:genre/:lang/:langOriginal/:desc/:year/:isbn",
-  (req, res) => {
-    // dodawanie rekordów
-    // dane pobierane z formularza u klienta, wysyłane w formacie json
-    let title = req.params.title;
-    let authors = req.params.authors;
-    let genre = req.params.genre;
-    let lang = req.params.lang;
-    let langOriginal = req.params.langOriginal;
-    let description = req.params.desc;
-    let year = req.params.year;
-    let ISBN = req.params.isbn;
+// app.get(
+//   "/addForm/:title/:authors/:genre/:lang/:langOriginal/:desc/:year/:isbn",
+//   (req, res) => {
+//     // dodawanie rekordów
+//     // dane pobierane z formularza u klienta, wysyłane w formacie json
+//     let title = req.params.title;
+//     let authors = req.params.authors;
+//     let genre = req.params.genre;
+//     let lang = req.params.lang;
+//     let langOriginal = req.params.langOriginal;
+//     let description = req.params.desc;
+//     let year = req.params.year;
+//     let ISBN = req.params.isbn;
 
-    addBook(
-      title,
-      authors,
-      genre,
-      langOriginal,
-      description,
-      year,
-      lang,
-      ISBN,
-      res
-    );
-    //res.send("lol123")
-    //res.json("Dodano książkę " + title)
-  }
-);
+//     addBook(
+//       title,
+//       authors,
+//       genre,
+//       langOriginal,
+//       description,
+//       year,
+//       lang,
+//       ISBN,
+//       res
+//     );
+//     //res.send("lol123")
+//     //res.json("Dodano książkę " + title)
+//   }
+// );
 
 app.post("/addForm", (req, res) => {
   if (req.body) {
@@ -250,9 +250,6 @@ app.post("/addForm", (req, res) => {
   }
   // dodawanie rekordów
   // dane pobierane z formularza u klienta, wysyłane w formacie json
-
-  //res.send("lol123")
-  //res.json("Dodano książkę " + title)
 });
 
 app.get("/addJson/:isbn", async (req, res) => {
@@ -282,6 +279,13 @@ app.get("/addJson/:isbn", async (req, res) => {
     } else if (lang == null && langOriginal == null) {
       lang = "";
       langOriginal = "";
+    }
+
+    if(desc[0] == ","){
+      desc = desc.substring(1)
+    }
+    if(desc == " , " || desc == ""){
+      desc = "brak"
     }
 
     addBook(
@@ -314,18 +318,18 @@ app.get("/deleteBook/:bookId", (req, res) => {
   });
 });
 
-app.get("/book/:bookId", (req, res) => {
-  // wyświetlanie dannych jednej książki
-  let bookId = req.params.bookId;
+// app.get("/book/:bookId", (req, res) => {
+//   // wyświetlanie dannych jednej książki
+//   let bookId = req.params.bookId;
 
-  let sql =
-    "select ksiazki.id, tytul, autorzy, rok_wydania, jezyk2.jezyk as jezyk, jezyk1.jezyk as jezyk_oryginal, nazwa, ISBN from ksiazki join autorzy on ksiazki.oznaczenie_odpowiedzialnosci = autorzy.id join jezyki as jezyk1 on ksiazki.oryginalny_jezyk = jezyk1.id join jezyki as jezyk2 on ksiazki.jezyk = jezyk2.id join gatunki on ksiazki.gatunek_id = gatunki.id where ksiazki.id like " +
-    bookId;
-  db.query(sql, (err, result) => {
-    console.log(result);
-    res.json(result);
-  });
-});
+//   let sql =
+//     "select ksiazki.id, tytul, autorzy, rok_wydania, jezyk2.jezyk as jezyk, jezyk1.jezyk as jezyk_oryginal, nazwa, ISBN from ksiazki join autorzy on ksiazki.oznaczenie_odpowiedzialnosci = autorzy.id join jezyki as jezyk1 on ksiazki.oryginalny_jezyk = jezyk1.id join jezyki as jezyk2 on ksiazki.jezyk = jezyk2.id join gatunki on ksiazki.gatunek_id = gatunki.id where ksiazki.id like " +
+//     bookId;
+//   db.query(sql, (err, result) => {
+//     console.log(result);
+//     res.json(result);
+//   });
+// });
 
 app.listen(port, (err) => {
   if (!err) {

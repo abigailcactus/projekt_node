@@ -10,6 +10,7 @@ export function AddISBN() {
       <form>
         <input
           type="text"
+          placeholder="ISBN"
           className="addBookI"
           onChange={(e) => {
             isbn = e.target.value;
