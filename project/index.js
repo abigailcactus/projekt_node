@@ -77,14 +77,9 @@ async function addBook(
   idAuthor = await checkIfExistsAddShowId(authorQuery, addAuthor);
 
   // sprawdzamy, czy mamy już taki język w bazie, jeżeli nie to go dodajemy
-  let langOriginalQuery =
-    "select id from jezyki where jezyk like '" + langOriginal + "'";
-  let addLangOriginal =
-    "insert into jezyki values ('', '" + langOriginal + "')";
-  idLangOriginal = await checkIfExistsAddShowId(
-    langOriginalQuery,
-    addLangOriginal
-  );
+  let langOriginalQuery = "select id from jezyki where jezyk like '" + langOriginal + "'";
+  let addLangOriginal = "insert into jezyki values ('', '" + langOriginal + "')";
+  idLangOriginal = await checkIfExistsAddShowId(langOriginalQuery, addLangOriginal);
 
   let langQuery = "select id from jezyki where jezyk like '" + lang + "'";
   let addLang = "insert into jezyki values ('', '" + lang + "')";
@@ -94,7 +89,6 @@ async function addBook(
 
   let genreQuery = "select id from gatunki where nazwa like '" + genre + "'";
   let addGenre = "insert into gatunki values ('', '" + genre + "')";
-
   idGenre = await checkIfExistsAddShowId(genreQuery, addGenre);
 
   // sprawdzamy jakie id mają w bazie autor, język i gatunek
