@@ -60,7 +60,10 @@ select {
   font-size: large;
 }
 #glass {
-  margin: 0.5em;
+  padding-top: 0.4em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  margin-left: 0.3em;
 }
 #glass:hover {
   background-color: var(--darkerColor);

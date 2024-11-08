@@ -123,11 +123,11 @@ export function Menu({ addISBN, addByHand, goHome, searchVal, searchFunc }) {
                 case "white":
                   document.documentElement.style.setProperty(
                     "--lighterColor",
-                    "#ffffff"
+                    "#d1d1d1"
                   );
                   document.documentElement.style.setProperty(
                     "--primaryColor",
-                    "#d1d1d1"
+                    "#ffffff"
                   );
                   document.documentElement.style.setProperty(
                     "--darkerColor",

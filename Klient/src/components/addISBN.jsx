@@ -9,7 +9,7 @@ export function AddISBN() {
       <label>Podaj ISBN książki:</label>
       <form>
         <input
-          type="text"
+          type="number"
           placeholder="ISBN"
           className="addBookI"
           onChange={(e) => {

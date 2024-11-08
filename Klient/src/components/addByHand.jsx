@@ -122,7 +122,7 @@ export function AddByHand() {
         <br />
         {isbn[1] == "red" && "Uzupełnij pole"}
         <input
-          type="text"
+          type="number"
           placeholder="ISBN"
           name="isbn"
           className="addBookI"
