@@ -4,7 +4,7 @@ import { PageContent } from "./components/pageConetnt";
 
 function App() {
   const [homeContent, setHomeContent] = useState(0);
-  const [searchContent, setSearch] = useState("")
+  const [searchContent, setSearch] = useState("");
   const goHome = () => {
     setHomeContent(0);
   };
@@ -16,7 +16,9 @@ function App() {
   };
   const search = (searchC) => {
     setHomeContent(3);
-    setSearch(searchC)
+    setSearch(searchC);
+    console.log("szukana fraza: ");
+    console.log(searchContent);
   };
 
   const [books, setBooks] = useState([]);
@@ -40,15 +42,26 @@ function App() {
         myJson.forEach((element) => {
           bookData = [...bookData, element];
         });
-        setBooks(bookData)
+        setBooks(bookData);
       });
   };
 
   return (
     <>
-      <Menu addISBN={addISBN} addByHand={addByHand} goHome={goHome} searchVal={search} searchFunc={getBooks}/>
+      <Menu
+        addISBN={addISBN}
+        addByHand={addByHand}
+        goHome={goHome}
+        searchVal={search}
+        searchFunc={getBooks}
+      />
       <div id="page_content">
-        <PageContent page={homeContent} books={books} getBooks={getBooks} search={searchContent}/>
+        <PageContent
+          page={homeContent}
+          books={books}
+          getBooks={getBooks}
+          search={searchContent}
+        />
       </div>
     </>
   );

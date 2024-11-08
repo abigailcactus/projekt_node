@@ -25,7 +25,7 @@ body {
 #menu select {
   margin-top: 0;
   margin-bottom: 0;
-  width: 10em;
+  width: 100%;
   margin-left: 200%;
 }
 select {
@@ -35,26 +35,23 @@ select {
   display: flex;
   padding: 1em;
   margin-top: 8em;
-  margin-left: 3em;
+  margin-left: 2%;
   display: flex;
 }
 #sort {
-  padding: 2em;
+  padding: 2%;
   background-color: var(--lighterColor);
-  /* margin-top: 6em; */
   position: fixed;
 }
 #home {
   background-color: var(--lighterColor);
   padding: 1em;
-  /* margin-top: 6em; */
-  margin-left: 15em;
+  margin-left: 19%;
 }
 input[type="text"],
 input[type="number"],
 select {
   background-color: var(--primaryColor);
-  /* width: 15em; */
   width: 95%;
   padding: 0.5em;
   border: none;
@@ -70,7 +67,7 @@ select {
 }
 .textBox {
   display: flex;
-  margin-left: 2em;
+  margin-left: 4%;
 }
 select {
   margin-top: 1em;
@@ -78,7 +75,7 @@ select {
 }
 .bookShort,
 .header {
-  margin-right: 0.5em;
+  margin-right: 0.5%;
   display: flex;
 }
 .bookShort:hover {
@@ -138,9 +135,9 @@ select {
   backdrop-filter: blur(3px);
 }
 #deleteWindow {
-  width: 20em;
+  width: 40%;
   margin: auto;
-  padding: 2em;
+  padding: 2%;
   background-color: var(--lighterColor);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.281);
 }
@@ -155,7 +152,6 @@ select {
 .bookInfo:hover {
   cursor: pointer;
 }
-
 .alert {
   margin-top: 1em;
 }

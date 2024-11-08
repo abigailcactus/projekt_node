@@ -3,29 +3,40 @@ import { useState } from "react";
 
 export function AddByHand() {
   const [alert, setAlert] = useState(false);
-  const [title, setTitle] = useState("");
-  const [isbn, setISBN] = useState("");
+  const [title, setTitle] = useState(["", ""]);
+  const [isbn, setISBN] = useState(["", ""]);
   const [desc, setDesc] = useState("");
   const [authors, setAuthors] = useState("");
-  const [year, setYear] = useState(0);
+  const [year, setYear] = useState(null);
   const [genre, setGenre] = useState("");
   const [lang, setLang] = useState("");
   const [langOg, setLangOg] = useState("");
+
   return (
     <div className="add">
       <form>
-        <label>Tytuł</label>
+        <label>
+          Tytuł {"("}pole obowiązkowe{")"}
+        </label>
         <br />
+        {title[1] == "red" && "Uzupełnij pole"}
         <input
           type="text"
           placeholder="Tytuł"
           name="title"
           className="addBookI"
           onChange={(e) => {
-            setTitle(e.target.value);
+            setTitle([e.target.value, ""]);
             console.log(title);
           }}
+          onBlur={(e) => {
+            if (e.target.value.length == 0) {
+              setTitle([e.target.value, "red"]);
+            }
+          }}
+          style={{ backgroundColor: title[1] }}
         />
+
         <br />
         <label>Opis</label>
         <br />
@@ -105,33 +116,42 @@ export function AddByHand() {
           }}
         />
         <br />
-        <label>ISBN</label>
+        <label>
+          ISBN {"("}pole obowiązkowe{")"}
+        </label>
         <br />
+        {isbn[1] == "red" && "Uzupełnij pole"}
         <input
           type="text"
           placeholder="ISBN"
           name="isbn"
           className="addBookI"
           onChange={(e) => {
-            setISBN(e.target.value);
+            setISBN([e.target.value, ""]);
             console.log(isbn);
           }}
+          onBlur={(e) => {
+            if (e.target.value.length == 0) {
+              setISBN([e.target.value, "red"]);
+            }
+          }}
+          style={{ backgroundColor: isbn[1] }}
         />
         <br />
       </form>
       <div
         className="addBtn"
         onClick={() => {
-          if (title.length > 0 && isbn.length > 0) {
+          if (title[0].length > 0 && isbn[0].length > 0) {
             const bookData = {
-              title: title,
+              title: title[0],
               desc: desc,
               authors: authors,
               year: year,
               genre: genre,
               lang: lang,
               ogLang: langOg,
-              isbn: isbn,
+              isbn: isbn[0],
             };
             fetch("http://localhost:8000/addForm", {
               method: "POST",
@@ -145,38 +165,14 @@ export function AddByHand() {
                 console.log(myJson);
                 setAlert(myJson);
               });
-            // let path =
-            //   "http://localhost:8000/addForm/" +
-            //   title +
-            //   "/" +
-            //   authors +
-            //   "/" +
-            //   genre +
-            //   "/" +
-            //   lang +
-            //   "/" +
-            //   langOg +
-            //   "/" +
-            //   desc +
-            //   "/" +
-            //   year +
-            //   "/" +
-            //   isbn;
-            // fetch(path)
-            //   .then(function (response) {
-            //     console.log(response);
-            //     return response.json();
-            //   })
-            //   .then(function (myJson) {
-            //     setAlert(myJson);
-            //     console.log(alert);
-            //   });
           } else {
-            if (title.length < 1) {
-              setAlert("Wpisz tytuł");
+            if (title[0].length < 1) {
+              setAlert("Uzupełnij pola");
+              setTitle(["", "red"]);
             }
-            if (isbn.length < 1) {
-              setAlert("Wpisz ISBN");
+            if (isbn[0].length < 1) {
+              setAlert("Uzupełnij pola");
+              setISBN(["", "red"]);
             }
           }
         }}
