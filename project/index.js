@@ -1,3 +1,5 @@
+// npm exec nodemon - uruchomienie
+
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
@@ -77,9 +79,14 @@ async function addBook(
   idAuthor = await checkIfExistsAddShowId(authorQuery, addAuthor);
 
   // sprawdzamy, czy mamy już taki język w bazie, jeżeli nie to go dodajemy
-  let langOriginalQuery = "select id from jezyki where jezyk like '" + langOriginal + "'";
-  let addLangOriginal = "insert into jezyki values ('', '" + langOriginal + "')";
-  idLangOriginal = await checkIfExistsAddShowId(langOriginalQuery, addLangOriginal);
+  let langOriginalQuery =
+    "select id from jezyki where jezyk like '" + langOriginal + "'";
+  let addLangOriginal =
+    "insert into jezyki values ('', '" + langOriginal + "')";
+  idLangOriginal = await checkIfExistsAddShowId(
+    langOriginalQuery,
+    addLangOriginal
+  );
 
   let langQuery = "select id from jezyki where jezyk like '" + lang + "'";
   let addLang = "insert into jezyki values ('', '" + lang + "')";
@@ -245,11 +252,11 @@ app.get("/addJson/:isbn", async (req, res) => {
       langOriginal = "";
     }
 
-    if(desc[0] == ","){
-      desc = desc.substring(1)
+    if (desc[0] == ",") {
+      desc = desc.substring(1);
     }
-    if(desc == " , " || desc == ""){
-      desc = "brak"
+    if (desc == " , " || desc == "") {
+      desc = "brak";
     }
 
     addBook(
@@ -264,7 +271,6 @@ app.get("/addJson/:isbn", async (req, res) => {
       res
     );
   } else {
-    console.log("Nie ma takiej książki w bazie Biblioteki Narodowej");
     response = "Nie ma takiej książki w bazie Biblioteki Narodowej";
     res.json(response);
   }
