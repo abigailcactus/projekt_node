@@ -21,12 +21,5 @@ export function PageContent({ page, books, getBooks, search}) {
     return <AddISBN />;
   } else if (page == 2) {
     return <AddByHand />;
-  } else if (page == 3) {
-    return (
-      <>
-        <Sort sortFun={getBooks} search={search}/>
-        <Home books={books} getBooks={getBooks} />
-      </>
-    );
-  }
+  } 
 }

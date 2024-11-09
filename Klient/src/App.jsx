@@ -5,6 +5,8 @@ import { PageContent } from "./components/pageConetnt";
 function App() {
   const [homeContent, setHomeContent] = useState(0);
   const [searchContent, setSearch] = useState("");
+  const [books, setBooks] = useState([]);
+
   const goHome = () => {
     setHomeContent(0);
   };
@@ -15,14 +17,11 @@ function App() {
     setHomeContent(2);
   };
   const search = (searchC) => {
-    setHomeContent(3);
+    setHomeContent(0);
     setSearch(searchC);
     console.log("szukana fraza: ");
     console.log(searchContent);
   };
-
-  const [books, setBooks] = useState([]);
-  let bookData = [];
 
   const getBooks = (search, order, sort) => {
     let path;
@@ -39,10 +38,7 @@ function App() {
         return response.json();
       })
       .then(function (myJson) {
-        myJson.forEach((element) => {
-          bookData = [...bookData, element];
-        });
-        setBooks(bookData);
+        setBooks(myJson);
       });
   };
 
