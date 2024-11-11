@@ -3,18 +3,18 @@ import { Delete } from "./delete";
 import { BookInfo } from "./bookInfo";
 
 export function BookShort({bookData, getBooks}) {
-  const [display, setDisplay] = useState("none")
-  const [showInfo, setShow] = useState()
+  const [displayDelete, setDisplay] = useState(false)
+  const [showInfo, setShow] = useState(false)
   const stopShowing = ()=>{
-    setShow("none")
+    setShow(false)
   }
   const displayNone = ()=>{
-    setDisplay("none")
+    setDisplay(false)
   }
   return (
     <>
     <div className="bookData" >
-      <div className="bookShort" onClick={() => {setShow("block")}}>
+      <div className="bookShort" onClick={() => {setShow(true)}}>
         <div>{bookData.tytul}</div>
         <div>{bookData.autorzy}</div>
         <div>{bookData.rok_wydania}</div>
@@ -28,14 +28,14 @@ export function BookShort({bookData, getBooks}) {
       <div
         className="deleteBtn"
         onClick={() => {
-          setDisplay("block")
+          setDisplay(true)
         }}
       >
         Usuń
       </div>
-      {display=="block"&&<Delete id={bookData.id} title={bookData.tytul} displayNone={displayNone} getBooks={getBooks}/>}
+      {displayDelete==true&&<Delete id={bookData.id} title={bookData.tytul} displayNone={displayNone} getBooks={getBooks}/>}
     </div>
-    {showInfo == "block"&&<BookInfo bookData={bookData} onClick={stopShowing}/>}
+    {showInfo == true&&<BookInfo bookData={bookData} onClick={stopShowing}/>}
     </>
   );
 }
