@@ -143,26 +143,26 @@ async function addBook(
   });
 }
 
-app.get("/order/:orderBy/:desc", (req, res) => {
+app.get("/order/:orderBy/:sort", (req, res) => {
   // wyświetlanie wszystkich rekordów bazy danych
   let order_by = req.params.orderBy; // zmienna określająca po czym sortowane są dane
-  let desc = req.params.desc; // czy malejąco?
+  let sort = req.params.sort; // czy malejąco?
   let sql =
     "select ksiazki.id, tytul, autorzy, opis, rok_wydania, jezyk2.jezyk as jezyk, jezyk1.jezyk as jezyk_oryginal, nazwa, ISBN from ksiazki join autorzy on ksiazki.oznaczenie_odpowiedzialnosci = autorzy.id join jezyki as jezyk1 on ksiazki.oryginalny_jezyk = jezyk1.id join jezyki as jezyk2 on ksiazki.jezyk = jezyk2.id join gatunki on ksiazki.gatunek_id = gatunki.id order by " +
     order_by +
     " " +
-    desc;
+    sort;
   db.query(sql, (err, result) => {
     console.log(result);
     res.json(result);
   });
 });
 
-app.get("/search/:searchVal/:orderBy/:desc", (req, res) => {
+app.get("/search/:searchVal/:orderBy/:sort", (req, res) => {
   // wyświetlanie wszystkich rekordów bazy danych
   let search = req.params.searchVal;
   let order_by = req.params.orderBy; // zmienna określająca po czym sortowane są dane
-  let desc = req.params.desc; // czy malejąco?
+  let sort = req.params.sort; // czy malejąco?
   let sql =
     "select ksiazki.id, tytul, autorzy, opis, rok_wydania, jezyk2.jezyk as jezyk, jezyk1.jezyk as jezyk_oryginal, nazwa, ISBN from ksiazki join autorzy on ksiazki.oznaczenie_odpowiedzialnosci = autorzy.id join jezyki as jezyk1 on ksiazki.oryginalny_jezyk = jezyk1.id join jezyki as jezyk2 on ksiazki.jezyk = jezyk2.id join gatunki on ksiazki.gatunek_id = gatunki.id having tytul like '%" +
     search +
@@ -183,7 +183,7 @@ app.get("/search/:searchVal/:orderBy/:desc", (req, res) => {
     "' order by " +
     order_by +
     " " +
-    desc;
+    sort;
   db.query(sql, (err, result) => {
     console.log(result);
     res.json(result);
